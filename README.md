@@ -12,3 +12,6 @@ If the player goes over 21, then they lose and the dealer wins. If the player ch
 If the dealer ends up with more than 21, then the dealer busts and the player wins. If the player and dealer end up tying (including 21), then nobody wins and no money changes hands.
 Super Blackjack is “super” because the player can choose to roll a die instead of taking a card. The value (1-6) shown on the die is the value added to the player’s hand.
 
+# Run 
+git clone
+
