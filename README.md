@@ -1,6 +1,6 @@
 # Super-Black-Jack
 
-# Rules and Description
+# Rules for Super-Black-Jack
 Super Blackjack is a card/dice game that works a lot like Blackjack.
 The objective is to get as close to 21 without going over. The player and the dealer are each dealt two cards. 
 The player’s cards are dealt face up, and only one of the dealer’s cards are shown.
