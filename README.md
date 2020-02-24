@@ -13,5 +13,6 @@ If the dealer ends up with more than 21, then the dealer busts and the player wi
 Super Blackjack is “super” because the player can choose to roll a die instead of taking a card. The value (1-6) shown on the die is the value added to the player’s hand.
 
 # Run 
-git clone
-
+To run the program on your terminal 
+git clone https://github.com/Algorithms98/Super-Black-Jack.git
+cd Super-Black-Jack
