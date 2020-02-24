@@ -10,71 +10,12 @@
 #include "Game.h"
 using namespace std;
 
-ifstream input("myfile.txt");           //opening the bank file 
-
-vector<int> Game::getHand() {
-    //polymorphism
-    std::vector<int> v;
-    return  v;
-}
-Game::Game() {
-    //do nothing
-}
+//ifstream input("myfile.txt");           //opening the bank file 
 
 enum CARD {
 	A = 11, J = 10, K = 10, Q = 10
 };
 
-
-void Game::shuffle(int cards[], int SIZE, queue<int>& CARDS) {
-    srand (time(NULL));
-	int pos1, pos2;
-	for (int i = 0; i < SIZE; i++) {
-		pos1 = rand() % 26;
-		pos2 = rand() % 26 + rand() % 26;
-		swap(cards[pos1], cards[pos2]);
-	}
-	for (int i = 0; i < SIZE; i++) {
-		CARDS.push(cards[i]);
-	}
-}
-
-void Game::checkWinner(int& dealerTotal, int& playerTotal, Player& player, double bet, int attempt, stringstream& curr) {
-	if (dealerTotal > playerTotal && dealerTotal <= 21) {
-		cout << "You had " << playerTotal << " and the dealer had " << dealerTotal << "." << endl;
-		cout << "You lost " << bet << " dollars." << endl;
-		player.updateBalance(false, bet);
-	
-		curr << "Hand: " << attempt << " Player: " << playerTotal << "          Dealer: " << dealerTotal << "     Result: Player Lost. Score below dealer." << endl;
-	}
-	else if (dealerTotal < playerTotal && playerTotal <= 21) {
-		cout << "You had " << playerTotal << " and the dealer had " << dealerTotal << "." << endl;
-		cout << "You won " << bet << " dollars." << endl;
-		player.updateBalance(true, bet);
-	
-		curr << "Hand: " << attempt << " Player: " << playerTotal << "          Dealer: " << dealerTotal << "     Result: Player Won. Score above dealer." << endl;
-	}
-	else if(dealerTotal  == playerTotal) {
-		cout << "You had " << playerTotal << " and the dealer had " << dealerTotal << "." << endl;
-		cout << "You won " << 0 << " dollars." << endl;
-	
-		curr << "Hand: " << attempt << " Player: " << playerTotal << "          Dealer: " << dealerTotal << "     Result: Draw." << endl;
-	}
-	else if(dealerTotal > 21 && playerTotal < 21){
-		cout << "You had " << playerTotal << " and the dealer had " << dealerTotal << "." << endl;
-		cout << "Dealer busts. You won " << bet << " dollars." << endl;
-		player.updateBalance(true, bet);
-
-		curr << "Hand: " << attempt << " Player: " << playerTotal << "          Dealer: " << dealerTotal << "     Result: Player Won. Dealer bust." << endl;
-	}
-	else if (dealerTotal < 21 && playerTotal > 21) {
-		cout << "You had " << playerTotal << " and the dealer had " << dealerTotal << "." << endl;
-		cout << "You bust. You lost " << bet << " dollars." << endl;
-		player.updateBalance(false, bet);
-
-		curr << "Hand: " << attempt << " Player: " << playerTotal << "          Dealer: " << dealerTotal << "     Result: Player Lost. Player bust." << endl;
-	}
-}
 
 int Game::start() {
     
@@ -89,7 +30,7 @@ int Game::start() {
 	};
 	
 	double money;
-	//ifstream input("myfile.txt");
+	ifstream input("myfile.txt");
 	input >> money;
 	input.close();
 	Player Player1(money);
@@ -229,6 +170,65 @@ int Game::start() {
     inputs << "New balance: " << Player1.getBalance();
     
 	return 0;
+}
+
+
+//Shuffling the cards 
+void Game::shuffle(int cards[], int SIZE, queue<int>& CARDS) {
+    srand (time(NULL));
+	int pos1, pos2;
+	for (int i = 0; i < SIZE; i++) {
+		pos1 = rand() % 26;
+		pos2 = rand() % 26 + rand() % 26;
+		swap(cards[pos1], cards[pos2]);
+	}
+	for (int i = 0; i < SIZE; i++) {
+		CARDS.push(cards[i]);
+	}
+}
+
+
+//Getting the player's hand 
+vector<int> Game::getHand() {
+    std::vector<int> v;
+    return  v;
+}
+
+void Game::checkWinner(int& dealerTotal, int& playerTotal, Player& player, double bet, int attempt, stringstream& curr) {
+	if (dealerTotal > playerTotal && dealerTotal <= 21) {
+		cout << "You had " << playerTotal << " and the dealer had " << dealerTotal << "." << endl;
+		cout << "You lost " << bet << " dollars." << endl;
+		player.updateBalance(false, bet);
+	
+		curr << "Hand: " << attempt << " Player: " << playerTotal << "          Dealer: " << dealerTotal << "     Result: Player Lost. Score below dealer." << endl;
+	}
+	else if (dealerTotal < playerTotal && playerTotal <= 21) {
+		cout << "You had " << playerTotal << " and the dealer had " << dealerTotal << "." << endl;
+		cout << "You won " << bet << " dollars." << endl;
+		player.updateBalance(true, bet);
+	
+		curr << "Hand: " << attempt << " Player: " << playerTotal << "          Dealer: " << dealerTotal << "     Result: Player Won. Score above dealer." << endl;
+	}
+	else if(dealerTotal  == playerTotal) {
+		cout << "You had " << playerTotal << " and the dealer had " << dealerTotal << "." << endl;
+		cout << "You won " << 0 << " dollars." << endl;
+	
+		curr << "Hand: " << attempt << " Player: " << playerTotal << "          Dealer: " << dealerTotal << "     Result: Draw." << endl;
+	}
+	else if(dealerTotal > 21 && playerTotal < 21){
+		cout << "You had " << playerTotal << " and the dealer had " << dealerTotal << "." << endl;
+		cout << "Dealer busts. You won " << bet << " dollars." << endl;
+		player.updateBalance(true, bet);
+
+		curr << "Hand: " << attempt << " Player: " << playerTotal << "          Dealer: " << dealerTotal << "     Result: Player Won. Dealer bust." << endl;
+	}
+	else if (dealerTotal < 21 && playerTotal > 21) {
+		cout << "You had " << playerTotal << " and the dealer had " << dealerTotal << "." << endl;
+		cout << "You bust. You lost " << bet << " dollars." << endl;
+		player.updateBalance(false, bet);
+
+		curr << "Hand: " << attempt << " Player: " << playerTotal << "          Dealer: " << dealerTotal << "     Result: Player Lost. Player bust." << endl;
+	}
 }
 
 
