@@ -16,3 +16,4 @@ Super Blackjack is “super” because the player can choose to roll a die inste
 To run the program on your terminal 
 git clone https://github.com/Algorithms98/Super-Black-Jack.git <br/>
 cd Super-Black-Jack
+./program6.out
